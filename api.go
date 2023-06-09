@@ -6,7 +6,7 @@ const USER_AGENT = "terraform"
 
 func (client Client) CallGetServiceTokenDetailsV2() (GetServiceTokenDetailsResponse, error) {
 	var tokenDetailsResponse GetServiceTokenDetailsResponse
-	response, err := client.cnf.httpClient.
+	response, err := client.cnf.HttpClient.
 		R().
 		SetResult(&tokenDetailsResponse).
 		SetHeader("User-Agent", USER_AGENT).
@@ -27,7 +27,7 @@ func (client Client) CallGetServiceTokenDetailsV2() (GetServiceTokenDetailsRespo
 
 func (client Client) CallGetSecretsV2(request GetEncryptedSecretsV2Request) (GetEncryptedSecretsV2Response, error) {
 	var secretsResponse GetEncryptedSecretsV2Response
-	requestToBeMade := client.cnf.httpClient.
+	requestToBeMade := client.cnf.HttpClient.
 		R().
 		SetResult(&secretsResponse).
 		SetHeader("User-Agent", USER_AGENT).

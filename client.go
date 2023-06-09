@@ -12,30 +12,30 @@ type Client struct {
 
 type Config struct {
 	HostURL      string
-	serviceToken string
-	apiKey       string
-	httpClient   *resty.Client // By default a client will be created
+	ServiceToken string
+	ApiKey       string
+	HttpClient   *resty.Client // By default a client will be created
 }
 
 func NewClient(cnf Config) (*Client, error) {
-	if cnf.apiKey == "" && cnf.serviceToken == "" {
+	if cnf.ApiKey == "" && cnf.ServiceToken == "" {
 		return nil, fmt.Errorf("You must enter either a API Key or Service token for authentication with Infisical API")
 	}
 
-	if cnf.httpClient == nil {
-		cnf.httpClient = resty.New()
-		cnf.httpClient.SetBaseURL(cnf.HostURL)
+	if cnf.HttpClient == nil {
+		cnf.HttpClient = resty.New()
+		cnf.HttpClient.SetBaseURL(cnf.HostURL)
 	}
 
-	if cnf.serviceToken != "" {
-		cnf.httpClient.SetAuthToken(cnf.serviceToken)
+	if cnf.ServiceToken != "" {
+		cnf.HttpClient.SetAuthToken(cnf.ServiceToken)
 	}
 
-	if cnf.apiKey != "" {
-		cnf.httpClient.SetHeader("X-API-KEY", cnf.apiKey)
+	if cnf.ApiKey != "" {
+		cnf.HttpClient.SetHeader("X-API-KEY", cnf.ApiKey)
 	}
 
-	cnf.httpClient.SetHeader("Accept", "application/json")
+	cnf.HttpClient.SetHeader("Accept", "application/json")
 
 	return &Client{cnf}, nil
 }
