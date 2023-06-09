@@ -27,13 +27,19 @@ func (client Client) CallGetServiceTokenDetailsV2() (GetServiceTokenDetailsRespo
 
 func (client Client) CallGetSecretsV2(request GetEncryptedSecretsV2Request) (GetEncryptedSecretsV2Response, error) {
 	var secretsResponse GetEncryptedSecretsV2Response
-	response, err := client.cnf.httpClient.
+	requestToBeMade := client.cnf.httpClient.
 		R().
 		SetResult(&secretsResponse).
 		SetHeader("User-Agent", USER_AGENT).
 		SetQueryParam("environment", request.Environment).
 		SetQueryParam("workspaceId", request.WorkspaceId).
-		SetQueryParam("tagSlugs", request.TagSlugs).
+		SetQueryParam("tagSlugs", request.TagSlugs)
+
+	if request.SecretPath != "" {
+		requestToBeMade.SetQueryParam("secretsPath", request.SecretPath)
+	}
+
+	response, err := requestToBeMade.
 		Get("api/v2/secrets")
 
 	if err != nil {
