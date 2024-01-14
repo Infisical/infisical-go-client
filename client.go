@@ -19,7 +19,7 @@ type Config struct {
 
 func NewClient(cnf Config) (*Client, error) {
 	if cnf.ApiKey == "" && cnf.ServiceToken == "" {
-		return nil, fmt.Errorf("You must enter either a API Key or Service token for authentication with Infisical API")
+		return nil, fmt.Errorf("you must enter either a API Key or Service token for authentication with Infisical API")
 	}
 
 	if cnf.HttpClient == nil {
