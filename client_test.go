@@ -14,7 +14,7 @@ package infisicalclient
 //
 //	println(response.Workspace)
 //
-//	secrets, err := client.FetchAndDecodeSecrets("6500618f61d12cd3d808036a", "dev")
+//	secrets, err := client.FetchAndDecodeSecrets("65006xxxxxxxxx", "dev")
 //
 //	for k, v := range secrets {
 //		println(k + ":" + v)
